@@ -1,0 +1,56 @@
+import ProductCard from '@/components/ProductCard';
+import withAuth from '@/domain/auth/withAuth';
+import { getProductAndPriceData } from '@/domain/usecases/payments';
+import auth from '@/data/auth';
+import api from '@/data/api';
+
+async function getProducts() {
+  const products = await getProductAndPriceData();
+  return {
+    products,
+  };
+}
+
+const Pricing = async () => {
+  const { products } = await getProducts();
+  const claim = await auth.getCustomClaimRole();
+
+  console.log(claim);
+  if (claim !== undefined && claim !== null) {
+    api.createPortalLink({ returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/` }).then(({ url }) => {
+      return (
+        <div className="flex items-center justify-center">
+          <a
+            href={url}
+            className="px-5 py-2 text-white bg-[#42A5F5] rounded-md"
+          >
+          Manage Subscription
+          </a>
+        </div>
+      );
+    });
+  }
+
+  return (
+    <>
+      <h1 className="px-5 pt-10 text-left text-5xl font-bold text-white">
+        Pricing Plans
+      </h1>
+      <p className="px-5 pb-10 pt-6 text-left text-lg text-white">
+        Select a plan and lets get you introduced to your team from the first
+        ever AI Label.
+      </p>
+      <div className=" flex flex-col md:flex-row">
+        {products.map(({ product, prices }) => {
+          return (
+            <div className="px-5 py-2" key={product.name}>
+              <ProductCard product={product} prices={prices} key={product.name} />
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default withAuth(Pricing);

@@ -45,7 +45,7 @@ const Home = () => {
         <div>
           {teams.map((team) => (
             <div key={team.id} className="py-4">
-              <Link href={`/team/${team.id}`}>
+              <Link href={`/team/${team.name}`}>
                 <TeamCard team={team} />
               </Link>
             </div>

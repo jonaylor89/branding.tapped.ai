@@ -17,12 +17,59 @@
 
 .tapped_btn {
   margin: 1rem;
-  @apply text-black min-w-[30%] bg-[#42A5F5] hover:bg-[#42A5F5]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-2 mb-2;
+  @apply text-black bg-[#42A5F5] hover:bg-[#42A5F5]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-2 mb-2;
 }
 
 .tapped_signup_btn {
   @apply text-[#42A5F5] hover:text-[#42A5F5]/90 bg-transparent whitespace-nowrap focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-2 mb-2;
 }
+
+.tapped_open_btn {
+  @apply text-[#42A5F5] hover:text-[#42A5F5]/90 bg-transparent whitespace-nowrap focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-xs text-center items-center;
+}
+
+.cards-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-padding: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 93vw;
+}
+
+.cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  background-color: #181818;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  width: 200px;
+  height: 250px;
+  display: inline-block;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* for phones */
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 140px;
+    height: 180px;
+  }
+}
+
 
 :root {
   --foreground-rgb: 0, 0, 0;
